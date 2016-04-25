@@ -17,7 +17,7 @@ public abstract class MiniGame {
         SHOW_INSTRUCTION, PLAY_STATE, POST_STATE, SHOW_PROGRESS, FINISH
     }
 
-    public static final long INSTRUCTION_DURATION = 2000;
+    public static final long INSTRUCTION_DURATION = 1000;
     public static final long PROGRESS_DURATION = 2000;
     public static final int TIME_HEIGHT = 30;
     protected String mainInstruction, subInstruction;
@@ -45,6 +45,16 @@ public abstract class MiniGame {
 
     public abstract void resume();
 
+    public void gameWon(){
+        isGameOver = true;
+        hasWon = true;
+    }
+
+    public void gameLost(){
+        isGameOver = true;
+        hasWon = false;
+    }
+
     public void dispose(){
         font.dispose();
         totalTime.dispose();
@@ -65,6 +75,23 @@ public abstract class MiniGame {
         if(progressStartTime == 0){
             progressStartTime = System.currentTimeMillis();
         }
+
+        if(!isProgressUpdated){
+            Game game = Game.getInstance();
+
+            if(hasWon){
+                game.addScore(100);
+            }else{
+                game.decreaseLives();
+            }
+
+            if(game.getNumGames()%3 == 0 && game.getStageDuration() > 2000){
+                game.setStageDuration(game.getStageDuration() - 1000);
+            }
+
+            isProgressUpdated = true;
+        }
+
         font.draw(spriteBatch, "Score: " + Game.getInstance().getScore(), 20, MainGame.HEIGHT - 20);
         font.draw(spriteBatch, "Lives: " + Game.getInstance().getLives(), 20 , MainGame.HEIGHT - 40);
         if(progressStartTime != 0 && Math.abs(progressStartTime - System.currentTimeMillis()) > PROGRESS_DURATION){

@@ -1,5 +1,6 @@
 package com.aldrinarciga.minigames.entities;
 
+import com.aldrinarciga.minigames.minigames.MiniGame;
 import com.badlogic.gdx.Gdx;
 import com.badlogic.gdx.graphics.Texture;
 import com.badlogic.gdx.graphics.g2d.SpriteBatch;
@@ -14,8 +15,11 @@ public abstract class Entity {
 
     protected Texture texture;
     protected Vector2 position, direction;
+    protected long width, height;
+    protected MiniGame miniGame;
 
-    public Entity(Texture texture, Vector2 position, Vector2 direction) {
+    public Entity(MiniGame miniGame, Texture texture, Vector2 position, Vector2 direction) {
+        this.miniGame = miniGame;
         this.texture = texture;
         this.position = position;
         this.direction = direction;

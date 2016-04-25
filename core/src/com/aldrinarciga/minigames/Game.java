@@ -14,11 +14,13 @@ public class Game {
     private int lives;
     private int stageDuration;
     private MiniGame currentGame;
+    private int numGames;
 
     private Game(){
         score = 0;
         lives = 3;
         stageDuration = 5000;
+        numGames = 0;
     }
 
     public static Game getInstance() {
@@ -45,6 +47,10 @@ public class Game {
                 currentGame = new GameOne();
                 break;
         }
+
+        currentGame = new GameOne();
+
+        numGames++;
     }
 
     public MiniGame getCurrentGame() {
@@ -77,5 +83,9 @@ public class Game {
     public int addScore(int toAdd){
         score+= toAdd;
         return score;
+    }
+
+    public int getNumGames() {
+        return numGames;
     }
 }

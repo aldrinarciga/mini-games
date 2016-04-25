@@ -2,6 +2,8 @@ package com.aldrinarciga.minigames.minigames;
 
 import com.aldrinarciga.minigames.Game;
 import com.aldrinarciga.minigames.MainGame;
+import com.aldrinarciga.minigames.entities.CommonBG;
+import com.aldrinarciga.minigames.entities.gameone_entities.GameOneRunner;
 import com.aldrinarciga.minigames.entitymanagers.GameOneEntityManager;
 import com.badlogic.gdx.graphics.Color;
 import com.badlogic.gdx.graphics.g2d.BitmapFont;
@@ -17,8 +19,8 @@ public class GameOne extends MiniGame {
     public void initGame() {
         mainInstruction = "RUN!";
         subInstruction = "Tap as fast as you can";
-        mainInstructionPosition = new Vector2(MainGame.WIDTH / 2, MainGame.HEIGHT / 2);
-        subInstructionPosition = new Vector2(MainGame.WIDTH / 2 + 50, MainGame.HEIGHT / 2);
+        mainInstructionPosition = new Vector2(50, MainGame.HEIGHT / 2);
+        subInstructionPosition = new Vector2(50,  (MainGame.HEIGHT / 2) - 20);
         postGameDuration = 2000;
         font = new BitmapFont();
         font.setColor(Color.RED);
@@ -30,7 +32,8 @@ public class GameOne extends MiniGame {
 
     @Override
     public void initEntities() {
-
+        entityManager.addEntity(new CommonBG(this));
+        entityManager.addEntity(new GameOneRunner(this));
     }
 
     @Override
@@ -51,16 +54,7 @@ public class GameOne extends MiniGame {
             postGameStartTime = System.currentTimeMillis();
         }
 
-        if(!isProgressUpdated){
-            if(hasWon){
-                Game.getInstance().addScore(100);
-            }else{
-                Game.getInstance().decreaseLives();
-            }
-            isProgressUpdated = true;
-        }
-
-        font.draw(spriteBatch, "POST GAME", 20, MainGame.HEIGHT - 20);
+        font.draw(spriteBatch, "POST GAME : " + (hasWon ? "WON" : "LOST"), 20, MainGame.HEIGHT - 20);
     }
 
     @Override

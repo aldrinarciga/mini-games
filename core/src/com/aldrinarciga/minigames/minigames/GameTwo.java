@@ -51,15 +51,6 @@ public class GameTwo extends MiniGame {
             postGameStartTime = System.currentTimeMillis();
         }
 
-        if(!isProgressUpdated){
-            if(hasWon){
-                Game.getInstance().addScore(100);
-            }else{
-                Game.getInstance().decreaseLives();
-            }
-            isProgressUpdated = true;
-        }
-
         font.draw(spriteBatch, "POST GAME", 20, MainGame.HEIGHT - 20);
     }
 
