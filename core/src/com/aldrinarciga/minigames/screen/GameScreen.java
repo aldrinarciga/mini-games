@@ -17,7 +17,7 @@ public class GameScreen extends Screen {
         camera.update();
         camera.resize();
 
-        game = Game.newGame();
+        game = Game.newGame(camera);
         game.getCurrentGame().initGame();
     }
 

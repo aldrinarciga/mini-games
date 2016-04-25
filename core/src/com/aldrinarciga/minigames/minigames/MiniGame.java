@@ -131,8 +131,7 @@ public abstract class MiniGame {
         spriteBatch.draw(remainingTime, timePosition.x, timePosition.y, remain, TIME_HEIGHT);
         if(diff > Game.getInstance().getStageDuration()){
             if(!isGameOver){
-                isGameOver = true;
-                hasWon = false;
+                gameLost();
             }
         }
     }

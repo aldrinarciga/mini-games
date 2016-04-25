@@ -1,5 +1,6 @@
 package com.aldrinarciga.minigames;
 
+import com.aldrinarciga.minigames.camera.OrthoCamera;
 import com.aldrinarciga.minigames.minigames.GameOne;
 import com.aldrinarciga.minigames.minigames.GameTwo;
 import com.aldrinarciga.minigames.minigames.MiniGame;
@@ -15,6 +16,7 @@ public class Game {
     private int stageDuration;
     private MiniGame currentGame;
     private int numGames;
+    private OrthoCamera camera;
 
     private Game(){
         score = 0;
@@ -29,8 +31,9 @@ public class Game {
         return instance;
     }
 
-    public static Game newGame(){
+    public static Game newGame(OrthoCamera camera){
         instance = new Game();
+        instance.camera = camera;
         return instance;
     }
 
@@ -48,7 +51,7 @@ public class Game {
                 break;
         }
 
-        currentGame = new GameOne();
+        currentGame = new GameTwo();
 
         numGames++;
     }
@@ -87,5 +90,9 @@ public class Game {
 
     public int getNumGames() {
         return numGames;
+    }
+
+    public OrthoCamera getCamera() {
+        return camera;
     }
 }

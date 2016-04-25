@@ -1,9 +1,6 @@
 package com.aldrinarciga.minigames.minigames;
 
-import com.aldrinarciga.minigames.Game;
 import com.aldrinarciga.minigames.MainGame;
-import com.aldrinarciga.minigames.entities.CommonBG;
-import com.aldrinarciga.minigames.entities.gametwo_entities.GameTwoButton;
 import com.aldrinarciga.minigames.entitymanagers.CommonEntityManager;
 import com.badlogic.gdx.graphics.Color;
 import com.badlogic.gdx.graphics.g2d.BitmapFont;
@@ -13,14 +10,14 @@ import com.badlogic.gdx.math.Vector2;
 /**
  * Created by perpetualwave on 25/04/2016.
  */
-public class GameTwo extends MiniGame {
+public class GameThree extends MiniGame{
 
     @Override
     public void initGame() {
-        mainInstruction = "DONT";
-        subInstruction = "Press the Red Button";
-        mainInstructionPosition = new Vector2(GameTwoButton.BUTTON_SIZE + 100, MainGame.HEIGHT / 2);
-        subInstructionPosition = new Vector2(GameTwoButton.BUTTON_SIZE + 100, (MainGame.HEIGHT / 2) - 20);
+        mainInstruction = "Game Two!";
+        subInstruction = "Tap as fast as you can";
+        mainInstructionPosition = new Vector2(MainGame.WIDTH / 2, MainGame.HEIGHT / 2);
+        subInstructionPosition = new Vector2(MainGame.WIDTH / 2, MainGame.HEIGHT / 2);
         postGameDuration = 2000;
         font = new BitmapFont();
         font.setColor(Color.RED);
@@ -32,8 +29,7 @@ public class GameTwo extends MiniGame {
 
     @Override
     public void initEntities() {
-        entityManager.addEntity(new CommonBG(this));
-        entityManager.addEntity(new GameTwoButton(this));
+
     }
 
     @Override
@@ -67,17 +63,4 @@ public class GameTwo extends MiniGame {
 
     }
 
-    @Override
-    protected void renderTime(SpriteBatch spriteBatch){
-        spriteBatch.draw(totalTime, timePosition.x, timePosition.y, MainGame.WIDTH, TIME_HEIGHT);
-        long diff = Math.abs(System.currentTimeMillis() - gameStartTime);
-        double percent = (double)diff/Game.getInstance().getStageDuration();
-        long remain = (long) ((MainGame.WIDTH * percent));
-        spriteBatch.draw(remainingTime, timePosition.x, timePosition.y, remain, TIME_HEIGHT);
-        if(diff > Game.getInstance().getStageDuration()){
-            if(!isGameOver){
-                gameWon();
-            }
-        }
-    }
 }

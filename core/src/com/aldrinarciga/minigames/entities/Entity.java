@@ -1,5 +1,7 @@
 package com.aldrinarciga.minigames.entities;
 
+import com.aldrinarciga.minigames.Game;
+import com.aldrinarciga.minigames.camera.OrthoCamera;
 import com.aldrinarciga.minigames.minigames.MiniGame;
 import com.badlogic.gdx.Gdx;
 import com.badlogic.gdx.graphics.Texture;
@@ -17,12 +19,14 @@ public abstract class Entity {
     protected Vector2 position, direction;
     protected long width, height;
     protected MiniGame miniGame;
+    protected OrthoCamera camera;
 
     public Entity(MiniGame miniGame, Texture texture, Vector2 position, Vector2 direction) {
         this.miniGame = miniGame;
         this.texture = texture;
         this.position = position;
         this.direction = direction;
+        camera = Game.getInstance().getCamera();
     }
 
     public abstract void handleInput();

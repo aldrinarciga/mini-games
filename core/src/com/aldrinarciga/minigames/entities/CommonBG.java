@@ -1,6 +1,7 @@
 package com.aldrinarciga.minigames.entities;
 
 import com.aldrinarciga.minigames.MainGame;
+import com.aldrinarciga.minigames.camera.OrthoCamera;
 import com.aldrinarciga.minigames.minigames.MiniGame;
 import com.badlogic.gdx.graphics.Texture;
 import com.badlogic.gdx.graphics.g2d.SpriteBatch;

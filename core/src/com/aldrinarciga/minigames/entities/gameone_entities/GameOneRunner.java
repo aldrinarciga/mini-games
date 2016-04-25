@@ -14,7 +14,7 @@ import com.badlogic.gdx.math.Vector2;
 public class GameOneRunner extends Entity {
 
     private static final long MIN_WIDTH = 200, MIN_HEIGHT = 300, MAX_WIDTH = 500,
-            TOADD_WIDTH = 10, TOADD_HEIGHT = 20, ADD_MULTIPLIER = 5;
+            TOADD_WIDTH = 10, TOADD_HEIGHT = 20, ADD_MULTIPLIER = 5, ADD_DIVIDER = 3;
 
     public GameOneRunner(MiniGame miniGame) {
         super(miniGame, new Texture("gameoneRunner.png"), null, null);
@@ -44,8 +44,8 @@ public class GameOneRunner extends Entity {
         handleInput();
         position = new Vector2((MainGame.WIDTH / 2) - (width / 2), (MainGame.HEIGHT / 2) - (height / 2));
 
-        width -= (TOADD_WIDTH / 3);
-        height -= (TOADD_HEIGHT / 3);
+        width -= (TOADD_WIDTH / ADD_DIVIDER);
+        height -= (TOADD_HEIGHT / ADD_DIVIDER);
 
         if(width < MIN_WIDTH){
             width = MIN_WIDTH;

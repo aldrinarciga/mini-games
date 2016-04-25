@@ -1,10 +1,9 @@
 package com.aldrinarciga.minigames.minigames;
 
-import com.aldrinarciga.minigames.Game;
 import com.aldrinarciga.minigames.MainGame;
 import com.aldrinarciga.minigames.entities.CommonBG;
 import com.aldrinarciga.minigames.entities.gameone_entities.GameOneRunner;
-import com.aldrinarciga.minigames.entitymanagers.GameOneEntityManager;
+import com.aldrinarciga.minigames.entitymanagers.CommonEntityManager;
 import com.badlogic.gdx.graphics.Color;
 import com.badlogic.gdx.graphics.g2d.BitmapFont;
 import com.badlogic.gdx.graphics.g2d.SpriteBatch;
@@ -24,7 +23,7 @@ public class GameOne extends MiniGame {
         postGameDuration = 2000;
         font = new BitmapFont();
         font.setColor(Color.RED);
-        entityManager = new GameOneEntityManager();
+        entityManager = new CommonEntityManager();
         gameStartTime = System.currentTimeMillis();
 
         initEntities();
@@ -55,11 +54,6 @@ public class GameOne extends MiniGame {
         }
 
         font.draw(spriteBatch, "POST GAME : " + (hasWon ? "WON" : "LOST"), 20, MainGame.HEIGHT - 20);
-    }
-
-    @Override
-    public void dispose() {
-        entityManager.dispose();
     }
 
     @Override
