@@ -9,19 +9,24 @@ import com.badlogic.gdx.utils.Array;
  */
 public abstract class EntityManager {
     protected Array<Entity> entities = new Array<Entity>();
+    protected boolean isPaused;
 
     public void update(){
-        for(int x = 0; x < entities.size; x++) {
-            Entity entity = entities.get(x);
-            entity.update();
+        if(!isPaused) {
+            for (int x = 0; x < entities.size; x++) {
+                Entity entity = entities.get(x);
+                entity.update();
+            }
+            checkCollisions();
         }
-        checkCollisions();
     }
 
     public void render(SpriteBatch spriteBatch){
-        for(int x = 0; x < entities.size; x++) {
-            Entity entity = entities.get(x);
-            entity.render(spriteBatch);
+        if(!isPaused) {
+            for (int x = 0; x < entities.size; x++) {
+                Entity entity = entities.get(x);
+                entity.render(spriteBatch);
+            }
         }
     }
 
@@ -34,4 +39,12 @@ public abstract class EntityManager {
     public abstract void removeEntity(Entity entity);
 
     public abstract void dispose();
+
+    public void pause() {
+        isPaused = true;
+    }
+
+    public void resume(){
+        isPaused = true;
+    }
 }

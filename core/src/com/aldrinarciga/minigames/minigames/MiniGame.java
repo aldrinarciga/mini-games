@@ -65,24 +65,43 @@ public abstract class MiniGame {
     //METHODS
     public abstract void initEntities();
 
-    public abstract void update();
+    public void pause(){
+        entityManager.pause();
+    }
 
-    public abstract void render(SpriteBatch spriteBatch);
+    public void resume(){
+        entityManager.resume();
+    }
 
-    public abstract void renderPostGame(SpriteBatch spriteBatch);
 
-    public abstract void pause();
+    public void update(){
+        entityManager.update();
+        checkStatus();
+    }
 
-    public abstract void resume();
+    public void render(SpriteBatch spriteBatch){
+        entityManager.render(spriteBatch);
+        renderTime(spriteBatch);
+    }
+
+    public void renderPostGame(SpriteBatch spriteBatch){
+        if(postGameStartTime == 0){
+            postGameStartTime = System.currentTimeMillis();
+        }
+
+        commonFont.draw(spriteBatch, "POST GAME : " + (hasWon ? "WON" : "LOST"), 20, MainGame.HEIGHT - 20);
+    }
 
     public void gameWon(){
         isGameOver = true;
         hasWon = true;
+        pause();
     }
 
     public void gameLost(){
         isGameOver = true;
         hasWon = false;
+        pause();
     }
 
     public void dispose(){

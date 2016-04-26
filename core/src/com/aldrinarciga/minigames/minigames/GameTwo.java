@@ -28,37 +28,6 @@ public class GameTwo extends MiniGame {
     }
 
     @Override
-    public void update() {
-        entityManager.update();
-        checkStatus();
-    }
-
-    @Override
-    public void render(SpriteBatch spriteBatch) {
-        entityManager.render(spriteBatch);
-        renderTime(spriteBatch);
-    }
-
-    @Override
-    public void renderPostGame(SpriteBatch spriteBatch) {
-        if(postGameStartTime == 0){
-            postGameStartTime = System.currentTimeMillis();
-        }
-
-        commonFont.draw(spriteBatch, "POST GAME : " + (hasWon ? "WON" : "LOST"), 20, MainGame.HEIGHT - 20);
-    }
-
-    @Override
-    public void pause() {
-
-    }
-
-    @Override
-    public void resume() {
-
-    }
-
-    @Override
     protected void renderTime(SpriteBatch spriteBatch){
         spriteBatch.draw(totalTime, timePosition.x, timePosition.y, MainGame.WIDTH, TIME_HEIGHT);
         long diff = Math.abs(System.currentTimeMillis() - gameStartTime);

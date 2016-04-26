@@ -20,15 +20,17 @@ public class GameThreeEntityManager extends EntityManager {
 
     @Override
     public void checkCollisions() {
-        if(player.getBounds().overlaps(missile.getBounds())){
-            isGameOver = true;
+        if(!isPaused) {
+            if (player.getBounds().overlaps(missile.getBounds())) {
+                isGameOver = true;
+            }
         }
     }
     public void update(){
-        player.update();
-        missile.update();
-        bg.update();
-        if(!isGameOver) {
+        if(!isPaused) {
+            player.update();
+            missile.update();
+            bg.update();
             checkCollisions();
         }
     }
