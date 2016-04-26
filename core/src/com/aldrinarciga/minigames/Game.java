@@ -2,6 +2,7 @@ package com.aldrinarciga.minigames;
 
 import com.aldrinarciga.minigames.camera.OrthoCamera;
 import com.aldrinarciga.minigames.minigames.GameOne;
+import com.aldrinarciga.minigames.minigames.GameThree;
 import com.aldrinarciga.minigames.minigames.GameTwo;
 import com.aldrinarciga.minigames.minigames.MiniGame;
 
@@ -38,13 +39,16 @@ public class Game {
     }
 
     public void generateGame(){
-        int rnd = (int) (Math.random() * 2) + 1;
+        int rnd = (int) (Math.random() * 3) + 1;
         switch (rnd){
             case 1:
                 currentGame = new GameOne();
                 break;
             case 2:
                 currentGame = new GameTwo();
+                break;
+            case 3:
+                currentGame = new GameThree();
                 break;
             default:
                 currentGame = new GameOne();

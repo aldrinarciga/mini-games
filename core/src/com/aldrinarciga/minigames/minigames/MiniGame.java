@@ -20,7 +20,7 @@ public abstract class MiniGame {
         SHOW_INSTRUCTION, PLAY_STATE, POST_STATE, SHOW_PROGRESS, FINISH
     }
 
-    public static final long INSTRUCTION_DURATION = 1000;
+    public static final long INSTRUCTION_DURATION = 2000;
     public static final long PROGRESS_DURATION = 2000;
     public static final int TIME_HEIGHT = 30;
     protected String mainInstruction, subInstruction;
