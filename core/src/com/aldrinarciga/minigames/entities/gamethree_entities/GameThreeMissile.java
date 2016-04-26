@@ -1,5 +1,6 @@
 package com.aldrinarciga.minigames.entities.gamethree_entities;
 
+import com.aldrinarciga.minigames.Game;
 import com.aldrinarciga.minigames.MainGame;
 import com.aldrinarciga.minigames.entities.Entity;
 import com.aldrinarciga.minigames.minigames.MiniGame;
@@ -17,7 +18,7 @@ public class GameThreeMissile extends Entity {
     private static final int MISSILE_HEIGHT = 40, MISSILE_WIDTH = 60;
 
     public GameThreeMissile(MiniGame miniGame) {
-        super(miniGame, new Texture("gamethreeMissile.gif"), new Vector2(MainGame.WIDTH + 50, MainGame.HEIGHT), new Vector2(MISSILE_SPEED, 0));
+        super(miniGame, new Texture("gamethreeMissileAnim.gif"), new Vector2(MainGame.WIDTH + 50, MainGame.HEIGHT), new Vector2(MISSILE_SPEED + -(Game.getInstance().getNumGames()), 0));
     }
 
     @Override
