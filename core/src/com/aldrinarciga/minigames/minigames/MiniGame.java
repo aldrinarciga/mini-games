@@ -170,6 +170,10 @@ public abstract class MiniGame {
         if(postGameStartTime != 0 && Math.abs(System.currentTimeMillis() - postGameStartTime) > postGameDuration) {
             isPostGameShown = true;
         }
+
+        if(isGameOver){
+            isInstructionShown = true;
+        }
     }
 
     protected void renderTime(SpriteBatch spriteBatch){
