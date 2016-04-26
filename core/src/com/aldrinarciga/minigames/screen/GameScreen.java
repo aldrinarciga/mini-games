@@ -18,7 +18,6 @@ public class GameScreen extends Screen {
         camera.resize();
 
         game = Game.newGame(camera);
-        game.getCurrentGame().initGame();
     }
 
     @Override
@@ -47,7 +46,6 @@ public class GameScreen extends Screen {
             case FINISH:
                 game.getCurrentGame().dispose();
                 game.generateGame();
-                game.getCurrentGame().initGame();
                 break;
             default:
                 game.getCurrentGame().render(spriteBatch);

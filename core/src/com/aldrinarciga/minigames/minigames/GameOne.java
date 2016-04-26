@@ -4,8 +4,7 @@ import com.aldrinarciga.minigames.MainGame;
 import com.aldrinarciga.minigames.entities.CommonBG;
 import com.aldrinarciga.minigames.entities.gameone_entities.GameOneRunner;
 import com.aldrinarciga.minigames.entitymanagers.CommonEntityManager;
-import com.badlogic.gdx.graphics.Color;
-import com.badlogic.gdx.graphics.g2d.BitmapFont;
+import com.aldrinarciga.minigames.entitymanagers.EntityManager;
 import com.badlogic.gdx.graphics.g2d.SpriteBatch;
 import com.badlogic.gdx.math.Vector2;
 
@@ -14,19 +13,10 @@ import com.badlogic.gdx.math.Vector2;
  */
 public class GameOne extends MiniGame {
 
-    @Override
-    public void initGame() {
-        mainInstruction = "RUN!";
-        subInstruction = "Tap as fast as you can";
-        mainInstructionPosition = new Vector2(50, MainGame.HEIGHT / 2);
-        subInstructionPosition = new Vector2(50,  (MainGame.HEIGHT / 2) - 20);
-        postGameDuration = 2000;
-        font = new BitmapFont();
-        font.setColor(Color.RED);
-        entityManager = new CommonEntityManager();
-        gameStartTime = System.currentTimeMillis();
-
-        initEntities();
+    public GameOne() {
+        super("RUN!", "Tap as fast as you can",
+                new Vector2(50, MainGame.HEIGHT / 2), new Vector2(50,  (MainGame.HEIGHT / 2) - 40),
+                2000, new CommonEntityManager());
     }
 
     @Override
@@ -53,7 +43,7 @@ public class GameOne extends MiniGame {
             postGameStartTime = System.currentTimeMillis();
         }
 
-        font.draw(spriteBatch, "POST GAME : " + (hasWon ? "WON" : "LOST"), 20, MainGame.HEIGHT - 20);
+        commonFont.draw(spriteBatch, "POST GAME : " + (hasWon ? "WON" : "LOST"), 20, MainGame.HEIGHT - 20);
     }
 
     @Override

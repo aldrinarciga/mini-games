@@ -15,19 +15,10 @@ import com.badlogic.gdx.math.Vector2;
  */
 public class GameTwo extends MiniGame {
 
-    @Override
-    public void initGame() {
-        mainInstruction = "DONT";
-        subInstruction = "Press the Red Button";
-        mainInstructionPosition = new Vector2(GameTwoButton.BUTTON_SIZE + 100, MainGame.HEIGHT / 2);
-        subInstructionPosition = new Vector2(GameTwoButton.BUTTON_SIZE + 100, (MainGame.HEIGHT / 2) - 20);
-        postGameDuration = 2000;
-        font = new BitmapFont();
-        font.setColor(Color.RED);
-        entityManager = new CommonEntityManager();
-        gameStartTime = System.currentTimeMillis();
-
-        initEntities();
+    public GameTwo() {
+        super("DONT", "Press the Red Button",
+                new Vector2(GameTwoButton.BUTTON_SIZE + 50, MainGame.HEIGHT / 2), new Vector2(GameTwoButton.BUTTON_SIZE + 50, (MainGame.HEIGHT / 2) - 40),
+                2000, new CommonEntityManager());
     }
 
     @Override
@@ -54,7 +45,7 @@ public class GameTwo extends MiniGame {
             postGameStartTime = System.currentTimeMillis();
         }
 
-        font.draw(spriteBatch, "POST GAME : " + (hasWon ? "WON" : "LOST"), 20, MainGame.HEIGHT - 20);
+        commonFont.draw(spriteBatch, "POST GAME : " + (hasWon ? "WON" : "LOST"), 20, MainGame.HEIGHT - 20);
     }
 
     @Override

@@ -3,9 +3,12 @@ package com.aldrinarciga.minigames.minigames;
 import com.aldrinarciga.minigames.Game;
 import com.aldrinarciga.minigames.MainGame;
 import com.aldrinarciga.minigames.entitymanagers.EntityManager;
+import com.badlogic.gdx.Gdx;
+import com.badlogic.gdx.graphics.Color;
 import com.badlogic.gdx.graphics.Texture;
 import com.badlogic.gdx.graphics.g2d.BitmapFont;
 import com.badlogic.gdx.graphics.g2d.SpriteBatch;
+import com.badlogic.gdx.graphics.g2d.freetype.FreeTypeFontGenerator;
 import com.badlogic.gdx.math.Vector2;
 
 /**
@@ -28,11 +31,38 @@ public abstract class MiniGame {
     protected EntityManager entityManager;
     protected Texture totalTime = new Texture("white.jpg"), remainingTime = new Texture("black.png");
     protected Vector2 timePosition = new Vector2(0,MainGame.HEIGHT - TIME_HEIGHT);
-    protected BitmapFont font;
+    protected BitmapFont commonFont, fontForMainInstruction, fontForSubInstruction;
+    protected FreeTypeFontGenerator generator;
+    protected FreeTypeFontGenerator.FreeTypeFontParameter parameter;
+
+    public MiniGame(String mainInstruction, String subInstruction,
+                    Vector2 mainInstructionPosition, Vector2 subInstructionPosition,
+                    long postGameDuration, EntityManager entityManager){
+        //INIT
+        gameStartTime = System.currentTimeMillis();
+        this.mainInstruction = mainInstruction;
+        this.subInstruction = subInstruction;
+        this.mainInstructionPosition = mainInstructionPosition;
+        this.subInstructionPosition = subInstructionPosition;
+        this.postGameDuration = postGameDuration;
+        this.entityManager = entityManager;
+
+        //FONTS
+        generator = new FreeTypeFontGenerator(Gdx.files.internal("fonts/avenir.ttc"));
+        parameter = new FreeTypeFontGenerator.FreeTypeFontParameter();
+        parameter.size = 30;
+        parameter.borderWidth = 1;
+        parameter.borderColor = Color.BLACK;
+        parameter.shadowOffsetX = 3;
+        fontForMainInstruction = generator.generateFont(parameter);
+        parameter.size = 25;
+        fontForSubInstruction = generator.generateFont(parameter);
+        commonFont = generator.generateFont(parameter);
+
+        initEntities();
+    }
 
     //METHODS
-    public abstract void initGame();
-
     public abstract void initEntities();
 
     public abstract void update();
@@ -56,19 +86,19 @@ public abstract class MiniGame {
     }
 
     public void dispose(){
-        font.dispose();
+        commonFont.dispose();
         totalTime.dispose();
         remainingTime.dispose();
         entityManager.dispose();
+        generator.dispose();
     }
 
     public void renderInstruction(SpriteBatch spriteBatch){
         if(instructionStartTime == 0){
             instructionStartTime = System.currentTimeMillis();
         }
-
-        font.draw(spriteBatch, mainInstruction, mainInstructionPosition.x, mainInstructionPosition.y);
-        font.draw(spriteBatch, subInstruction, subInstructionPosition.x , subInstructionPosition.y);
+        fontForMainInstruction.draw(spriteBatch, mainInstruction, mainInstructionPosition.x, mainInstructionPosition.y);
+        fontForSubInstruction.draw(spriteBatch, subInstruction, subInstructionPosition.x , subInstructionPosition.y);
     }
 
     public void renderProgress(SpriteBatch spriteBatch){
@@ -92,8 +122,8 @@ public abstract class MiniGame {
             isProgressUpdated = true;
         }
 
-        font.draw(spriteBatch, "Score: " + Game.getInstance().getScore(), 20, MainGame.HEIGHT - 20);
-        font.draw(spriteBatch, "Lives: " + Game.getInstance().getLives(), 20 , MainGame.HEIGHT - 40);
+        commonFont.draw(spriteBatch, "Score: " + Game.getInstance().getScore(), 20, MainGame.HEIGHT - 20);
+        commonFont.draw(spriteBatch, "Lives: " + Game.getInstance().getLives(), 20, MainGame.HEIGHT - 50);
         if(progressStartTime != 0 && Math.abs(progressStartTime - System.currentTimeMillis()) > PROGRESS_DURATION){
             isProgressShown = true;
         }

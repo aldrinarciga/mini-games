@@ -51,8 +51,6 @@ public class Game {
                 break;
         }
 
-        currentGame = new GameTwo();
-
         numGames++;
     }
 
